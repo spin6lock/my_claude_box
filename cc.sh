@@ -1,5 +1,13 @@
 #!/bin/bash
 #docker build -t claude-code .
+
+# 自动加载 .env 文件（如果存在）
+if [ -f .env ]; then
+  set -a
+  source .env
+  set +a
+fi
+
 docker run --rm -it \
   --user "$(id -u):$(id -g)" \
   -v "$(pwd)":/workspace \

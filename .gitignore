@@ -1,0 +1,11 @@
+# 环境变量和敏感配置
+.env
+.env.local
+
+# Claude 配置（可能包含敏感信息）
+.claude/settings.local.json
+.claude/settings.json
+
+# 日志和临时文件
+*.log
+.DS_Store

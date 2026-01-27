@@ -12,7 +12,7 @@ RUN sed -i 's|http://archive.ubuntu.com|http://mirrors.aliyun.com|g' /etc/apt/so
 # 安装基本工具 + Node.js 18 LTS
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl wget git vim build-essential \
-    ca-certificates gnupg lsb-release \
+    ca-certificates gnupg lsb-release apt-utils \
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
