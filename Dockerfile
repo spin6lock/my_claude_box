@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM m.daocloud.io/docker.io/library/ubuntu:20.04
 
 # 避免交互式安装提示 + 设置中文环境（可选）
 ENV DEBIAN_FRONTEND=noninteractive
