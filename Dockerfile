@@ -1,31 +1,21 @@
-FROM m.daocloud.io/docker.io/library/ubuntu:20.04
+FROM ubuntu:24.04
 
-# 避免交互式安装提示 + 设置中文环境（可选）
+# 避免交互式安装提示
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
-# 使用阿里云镜像源
-RUN sed -i 's|http://archive.ubuntu.com|http://mirrors.aliyun.com|g' /etc/apt/sources.list && \
-    sed -i 's|http://security.ubuntu.com|http://mirrors.aliyun.com|g' /etc/apt/sources.list
-
-# 安装基本工具 + Node.js 18 LTS
+# 安装基本工具
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl wget git vim build-essential \
-    ca-certificates gnupg lsb-release apt-utils \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
+    ca-certificates gnupg lsb-release apt-utils sudo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 使用 npm 淘宝镜像
-RUN npm config set registry https://registry.npmmirror.com
+# 使用官方安装脚本安装 Claude Code CLI
+RUN curl -fsSL https://claude.ai/install.sh | sh
 
-# 安装 Claude Code CLI
-RUN npm install -g @anthropic-ai/claude-code
-
-# 安装 sudo 并创建非 root 用户
-RUN apt-get update && apt-get install -y sudo && \
-    useradd -m -s /bin/bash claude && \
+# 创建非 root 用户
+RUN useradd -m -s /bin/bash claude && \
     echo "claude ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -p /workspace && \
     chown -R claude:claude /workspace
@@ -34,4 +24,3 @@ USER claude
 WORKDIR /workspace
 
 CMD ["claude", "code", "--dangerously-skip-permissions"]
-
