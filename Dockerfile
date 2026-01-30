@@ -6,6 +6,7 @@ ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 ENV TERM=xterm-256color
 ENV COLORTERM=truecolor
+ENV PATH=/root/.local/bin:$PATH
 
 # 安装基本工具
 RUN apt-get update && apt-get install -y --no-install-recommends \

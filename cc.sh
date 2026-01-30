@@ -31,6 +31,8 @@ docker run --rm -it \
   -v "$(pwd)":/workspace \
   -v "$HOME/.claude":/home/claude/.claude \
   -v "$HOME/.claude/statusline.sh":/home/claude/.claude/statusline.sh:ro \
+  -v "$HOME/.gitconfig":"/home/claude/.gitconfig":ro \
+  -v "$HOME/.ssh":"/home/claude/.ssh:ro" \
   -w /workspace \
   -e ANTHROPIC_AUTH_TOKEN="${ANTHROPIC_AUTH_TOKEN}" \
   -e ANTHROPIC_BASE_URL="${ANTHROPIC_BASE_URL:-https://open.bigmodel.cn/api/anthropic}" \
