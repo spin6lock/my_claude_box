@@ -29,7 +29,6 @@ fi
 docker run --rm -it \
   -v "$(pwd)":/workspace \
   -v "$HOME/.claude":/home/claude/.claude \
-  -v "$HOME/.local":/home/claude/.local \
   -v "$HOME/.claude/statusline.sh":/home/claude/.claude/statusline.sh:ro \
   -v "$HOME/.gitconfig":"/home/claude/.gitconfig":ro \
   -v "$HOME/.ssh":"/home/claude/.ssh:ro" \
