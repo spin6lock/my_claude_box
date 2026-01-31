@@ -12,6 +12,7 @@ ENV PATH=/root/.local/bin:$PATH
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl wget git vim build-essential openssh-client \
     ca-certificates gnupg lsb-release apt-utils sudo zsh \
+    python3 python3-pip python3-venv \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 使用官方安装脚本安装 Claude Code CLI（先安装在 root 下）
