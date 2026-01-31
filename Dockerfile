@@ -10,7 +10,7 @@ ENV PATH=/root/.local/bin:$PATH
 
 # 安装基本工具和 zsh
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl wget git vim build-essential \
+    curl wget git vim build-essential openssh-client \
     ca-certificates gnupg lsb-release apt-utils sudo zsh \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
