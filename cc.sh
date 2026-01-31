@@ -32,6 +32,7 @@ docker run --rm -it \
   -v "$HOME/devcontainer_claude/statusline.sh":/home/claude/.claude/statusline.sh:ro \
   -v "$HOME/.gitconfig":"/home/claude/.gitconfig":ro \
   -v "$HOME/.ssh":"/home/claude/.ssh:ro" \
+  -v "$HOME/.config/gh":"/home/claude/.config/gh:ro" \
   -w /workspace \
   -e PATH="/home/claude/.local/bin:$PATH" \
   -e ANTHROPIC_AUTH_TOKEN="${ANTHROPIC_AUTH_TOKEN}" \

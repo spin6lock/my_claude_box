@@ -18,6 +18,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 使用官方安装脚本安装 Claude Code CLI（先安装在 root 下）
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
+# 安装 GitHub CLI (gh)
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
+    apt-get update && apt-get install -y gh && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # 创建非 root 用户，使用 zsh 作为 shell (UID 1000 以匹配宿主机)
 # 先删除默认的 ubuntu 用户 (UID 1000)
 RUN userdel -r ubuntu 2>/dev/null || true && \
