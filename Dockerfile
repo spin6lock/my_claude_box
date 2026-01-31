@@ -19,7 +19,9 @@ RUN curl -fsSL https://claude.ai/install.sh | bash && \
     cp /root/.local/bin/claude /usr/local/bin/claude
 
 # 创建非 root 用户，使用 zsh 作为 shell (UID 1000 以匹配宿主机)
-RUN useradd -m -u 1000 -s /bin/zsh claude && \
+# 先删除默认的 ubuntu 用户 (UID 1000)
+RUN userdel -r ubuntu 2>/dev/null || true && \
+    useradd -m -u 1000 -s /bin/zsh claude && \
     echo "claude ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -p /workspace && \
     chown -R claude:claude /workspace
