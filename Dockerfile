@@ -14,9 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates gnupg lsb-release apt-utils sudo zsh \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 使用官方安装脚本安装 Claude Code CLI
-RUN curl -fsSL https://claude.ai/install.sh | bash && \
-    cp /root/.local/bin/claude /usr/local/bin/claude
+# 使用官方安装脚本安装 Claude Code CLI（先安装在 root 下）
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # 创建非 root 用户，使用 zsh 作为 shell (UID 1000 以匹配宿主机)
 # 先删除默认的 ubuntu 用户 (UID 1000)
@@ -24,7 +23,10 @@ RUN userdel -r ubuntu 2>/dev/null || true && \
     useradd -m -u 1000 -s /bin/zsh claude && \
     echo "claude ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -p /workspace && \
-    chown -R claude:claude /workspace
+    chown -R claude:claude /workspace && \
+    mkdir -p /home/claude/.local/bin && \
+    cp /root/.local/bin/claude /home/claude/.local/bin/claude && \
+    chown -R claude:claude /home/claude/.local
 
 # 配置 zsh 环境
 USER claude
