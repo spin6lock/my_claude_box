@@ -44,4 +44,4 @@ RUN echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc && \
 
 WORKDIR /workspace
 
-CMD ["claude", "code", "--dangerously-skip-permissions"]
+CMD ["claude", "--dangerously-skip-permissions"]
