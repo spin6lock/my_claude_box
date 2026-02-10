@@ -28,14 +28,15 @@ fi
 
 docker run --rm -it \
   -v "$(pwd)":/workspace \
-  -v "$HOME/devcontainer_claude":/home/claude/.claude \
-  -v "$HOME/devcontainer_claude/statusline.sh":/home/claude/.claude/statusline.sh:ro \
+  -v "$HOME/clean_dev_container_claude":/home/claude/.claude \
+  -v "$HOME/clean_dev_container_claude/claude.json":/home/claude/.claude.json \
   -v "$HOME/.gitconfig":"/home/claude/.gitconfig":ro \
   -v "$HOME/.ssh":"/home/claude/.ssh:ro" \
   -v "$HOME/.config/gh":"/home/claude/.config/gh:ro" \
   -w /workspace \
-  -e PATH="/home/claude/.local/bin:$PATH" \
+  -e PATH="/home/claude/.local/bin" \
   -e ANTHROPIC_AUTH_TOKEN="${ANTHROPIC_AUTH_TOKEN}" \
   -e ANTHROPIC_BASE_URL="${ANTHROPIC_BASE_URL:-https://open.bigmodel.cn/api/anthropic}" \
   -e API_TIMEOUT_MS="3000000" \
+  -e CLAUDE_COLOR_SCHEME="dark" \
   ghcr.io/spin6lock/my_claude_box:latest "$@"
