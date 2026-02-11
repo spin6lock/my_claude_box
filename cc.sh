@@ -34,7 +34,7 @@ docker run --rm -it \
   -v "$HOME/.ssh":"/home/claude/.ssh:ro" \
   -v "$HOME/.config/gh":"/home/claude/.config/gh:ro" \
   -w /workspace \
-  -e PATH="/home/claude/.local/bin:%PATH" \
+  -e PATH="/home/claude/.local/bin:$PATH" \
   -e ANTHROPIC_AUTH_TOKEN="${ANTHROPIC_AUTH_TOKEN}" \
   -e ANTHROPIC_BASE_URL="${ANTHROPIC_BASE_URL:-https://open.bigmodel.cn/api/anthropic}" \
   -e API_TIMEOUT_MS="3000000" \
